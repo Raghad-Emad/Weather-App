@@ -1,0 +1,56 @@
+.flex-parent {
+  width: 300px;
+  position: relative;
+  top: -112px;
+  left: 450px;
+}
+
+.temprature-toggle {
+  position: relative;
+  color: #fff;
+  width: 80px;
+  display: flex;
+}
+
+button {
+  width: 45px;
+  color: #fff;
+  border-color: transparent;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.selected {
+  background-color: transparent;
+}
+
+.selected::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 2;
+  left: 1px;
+  top: 0;
+  bottom: 0;
+  border: 1px solid white;
+  border-width: 0 0 0 1px;
+  width: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .flex-parent {
+    left: 340px;
+  }
+}
+@media only screen and (min-width: 425px) {
+  .flex-parent {
+    left: 320px;
+    width: 80px;
+  }
+}
+@media only screen and (min-width: 375px) {
+  .flex-parent {
+    left: 300px;
+  }
+}
+@media only screen and (min-width: 320px) {
+}

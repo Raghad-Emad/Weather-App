@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface WeatherState {
   temperature: number;
@@ -11,35 +11,44 @@ interface WeatherState {
   isCelsius: boolean;
   dailyForecast: { day: string; temperature: number }[];
   hourlyForecast: { time: string; temperature: number }[];
+  weatherIconUrl: string;
 }
 
 const initialState: WeatherState = {
   temperature: 0,
-  summary: '',
+  summary: "",
   highTemp: 0,
   lowTemp: 0,
-  forecastText: '',
-  currentDate: '',
-  cityName: '',
+  forecastText: "",
+  currentDate: "",
+  cityName: "",
   isCelsius: true, // Default to Celsius
   dailyForecast: [],
   hourlyForecast: [],
+  weatherIconUrl: "",
 };
 
 const weatherSlice = createSlice({
-  name: 'weather',
+  name: "weather",
   initialState,
   reducers: {
-    setWeatherData: (state, action: PayloadAction<{ temperature: number; summary: string; cityName: string }>) => {
+    setWeatherData: (state, action: PayloadAction<WeatherState>) => {
       return {
         ...state,
         ...action.payload,
       };
     },
     toggleTemperatureUnit: (state) => {
-      state.temperature = state.isCelsius ? (state.temperature * 9) / 5 + 32 : ((state.temperature - 32) * 5) / 9;
-      state.highTemp = state.isCelsius ? (state.highTemp * 9) / 5 + 32 : ((state.highTemp - 32) * 5) / 9;
-      state.lowTemp = state.isCelsius ? (state.lowTemp * 9) / 5 + 32 : ((state.lowTemp - 32) * 5) / 9;
+      // Toggle temperature unit logic
+      state.temperature = state.isCelsius
+        ? (state.temperature * 9) / 5 + 32
+        : ((state.temperature - 32) * 5) / 9;
+      state.highTemp = state.isCelsius
+        ? (state.highTemp * 9) / 5 + 32
+        : ((state.highTemp - 32) * 5) / 9;
+      state.lowTemp = state.isCelsius
+        ? (state.lowTemp * 9) / 5 + 32
+        : ((state.lowTemp - 32) * 5) / 9;
       state.isCelsius = !state.isCelsius;
     },
   },

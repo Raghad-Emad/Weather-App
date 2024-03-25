@@ -1,18 +1,23 @@
-import { useSelector } from 'react-redux';
-import { RootState } from '../app/store';
+import "./hourlyforecast.css";
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store";
 
 const HourlyForecast: React.FC = () => {
   const { hourlyForecast } = useSelector((state: RootState) => state.weather);
-
+  console.log(hourlyForecast);
   return (
-    <div>
-      <h2>Hourly Forecast:</h2>
+    <div className="hourly-forecast">
+      <p>Hourly</p>
       <ul>
-        {hourlyForecast.slice(0, 24).map((hour, index) => (
-          <li key={index}>{hour.time}: {hour.temperature}°</li>
+        {hourlyForecast.map((hour, index) => (
+          <li key={index}>
+            {hour.time.slice(11, 16)}
+            {/* <HourlyForecastIcon iconUrl={hour.iconUrl} /> */}
+            <br />
+            {hour.temperature}°
+          </li>
         ))}
       </ul>
-      
     </div>
   );
 };

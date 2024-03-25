@@ -1,13 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
-import weatherReducer, { setWeatherData } from '../features/weatherSlice';
-import { fetchWeatherData } from '../api';
-
-
-const location = 'New York'; 
-
-fetchWeatherData(location).then((data) => {
-  store.dispatch(setWeatherData(data)); // Use setWeatherData action creator
-});
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import weatherReducer, { setWeatherData } from "../features/weatherSlice";
+import { fetchWeatherData } from "../api";
 
 const store = configureStore({
   reducer: {
@@ -15,7 +8,19 @@ const store = configureStore({
   },
 });
 
+// Fetch weather data from the API and dispatch the setWeatherData action
+const location = "New York";
+fetchWeatherData(location).then((data) => {
+  store.dispatch(setWeatherData(data));
+});
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
 
 export default store;
